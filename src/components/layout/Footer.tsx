@@ -2,7 +2,7 @@
 'use client';
 
 import { Facebook, Twitter, Instagram } from 'lucide-react';
-import { motion, useAnimation } from 'framer-motion';
+import { motion, useAnimation, Variants } from 'framer-motion';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -16,23 +16,30 @@ export default function Footer() {
     }
   }, [inView, controls]);
 
-  const footerVariants = {
+  const footerVariants: Variants = {
     hidden: { opacity: 0, y: 100 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.8,
-        ease: 'easeOut',
+        ease: [0.25, 0.1, 0.25, 1], // Corrected: cubic-bezier equivalent of easeOut
         when: 'beforeChildren',
         staggerChildren: 0.15,
       },
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.1, 0.25, 1], // Corrected
+      },
+    },
   };
 
   return (
